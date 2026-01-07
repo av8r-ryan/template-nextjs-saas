@@ -69,7 +69,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
       </head>
-      <body className="min-h-screen bg-base-100 text-base-content antialiased">
+      <body className="bg-base-100 text-base-content min-h-screen antialiased">
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>

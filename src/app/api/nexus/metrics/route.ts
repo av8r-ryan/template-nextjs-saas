@@ -66,7 +66,8 @@ export async function GET(request: Request) {
   }
 
   const { searchParams } = new URL(request.url);
-  const period = (searchParams.get("period") ?? "daily") as ProductMetrics["period"];
+  const period = (searchParams.get("period") ??
+    "daily") as ProductMetrics["period"];
 
   const metrics = await getMetrics();
 

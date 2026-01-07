@@ -1,6 +1,7 @@
 # SaaS Template - Agent Reference
 
 ## Quick Commands
+
 - `npm run dev` - Start development server (Turbopack)
 - `npm run build` - Production build
 - `npm run lint` - ESLint + Prettier check
@@ -11,6 +12,7 @@
 - `npm run validate` - Full validation pipeline
 
 ## Architecture
+
 - Next.js 16 App Router (Turbopack default)
 - React 19, Node.js 24, TypeScript strict
 - Database: Supabase or Neon (set via `DATABASE_PROVIDER`)
@@ -19,6 +21,7 @@
 - Email: AWS SES
 
 ## Key Files
+
 - `/src/lib/db/` - Database abstraction (Supabase/Neon)
 - `/src/lib/auth/` - Auth abstraction (Supabase Auth/NextAuth)
 - `/src/lib/config.ts` - Centralized env config with Zod validation
@@ -28,29 +31,34 @@
 - `/src/app/api/` - API routes
 
 ## Database Provider Switch
+
 ```typescript
 // Set DATABASE_PROVIDER=supabase or DATABASE_PROVIDER=neon
-import { getDatabase } from '@/lib/db';
+import { getDatabase } from "@/lib/db";
 const db = await getDatabase();
 ```
 
 ## Auth Provider Switch
+
 ```typescript
 // Set AUTH_PROVIDER=supabase or AUTH_PROVIDER=nextauth
-import { getAuth } from '@/lib/auth';
+import { getAuth } from "@/lib/auth";
 const auth = await getAuth();
 ```
 
 ## Nexus Integration
+
 - Health: `GET /api/nexus/health` - Returns health status
 - Metrics: `GET /api/nexus/metrics` - Returns product metrics
 
 ## Testing
+
 - Unit tests: `src/**/*.test.ts` (Vitest)
 - E2E tests: `e2e/**/*.spec.ts` (Playwright)
 - Lighthouse: `lighthouserc.js` config
 
 ## Directory Structure
+
 ```
 src/
 ├── app/           # Next.js App Router pages

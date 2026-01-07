@@ -47,13 +47,16 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.id = user.id;
+        token["id"] = user.id;
       }
       return token;
     },
     async session({ session, token }) {
-      if (token && session.user) {
-        (session.user as { id?: string }).id = token.id as string;
+      const tokenId = token["id"];
+      if (token && session.user && typeof tokenId === "string") {
+        // Extend session.user with id property
+        const extendedUser = session.user as { id?: string };
+        extendedUser.id = tokenId;
       }
       return session;
     },
@@ -76,7 +79,12 @@ export async function getServerAuth(): Promise<AuthProvider> {
     async getSession(): Promise<AuthSession | null> {
       const session = await getNextAuthSession();
       if (!session?.user) return null;
-      const user = session.user as { id?: string; email?: string; name?: string | null; image?: string | null };
+      const user = session.user as {
+        id?: string;
+        email?: string;
+        name?: string | null;
+        image?: string | null;
+      };
       return {
         user: {
           id: user.id ?? "",
@@ -91,7 +99,12 @@ export async function getServerAuth(): Promise<AuthProvider> {
     async getUser(): Promise<AuthUser | null> {
       const session = await getNextAuthSession();
       if (!session?.user) return null;
-      const user = session.user as { id?: string; email?: string; name?: string | null; image?: string | null };
+      const user = session.user as {
+        id?: string;
+        email?: string;
+        name?: string | null;
+        image?: string | null;
+      };
       return {
         id: user.id ?? "",
         email: user.email ?? "",
@@ -126,7 +139,9 @@ export async function getServerAuth(): Promise<AuthProvider> {
 
     async resetPassword(_email: string): Promise<{ error: Error | null }> {
       // Implement your own password reset logic
-      return { error: new Error("Implement password reset in your application") };
+      return {
+        error: new Error("Implement password reset in your application"),
+      };
     },
   };
 }

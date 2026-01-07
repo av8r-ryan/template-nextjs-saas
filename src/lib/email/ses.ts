@@ -3,7 +3,11 @@
  * Handles transactional email sending via AWS SES
  */
 
-import { SESClient, SendEmailCommand, SendTemplatedEmailCommand } from "@aws-sdk/client-ses";
+import {
+  SESClient,
+  SendEmailCommand,
+  SendTemplatedEmailCommand,
+} from "@aws-sdk/client-ses";
 import { env } from "../config";
 
 // Initialize SES client
@@ -39,7 +43,9 @@ export interface TemplatedEmailOptions {
 /**
  * Send a simple email
  */
-export async function sendEmail(options: EmailOptions): Promise<{ success: boolean; messageId?: string; error?: string }> {
+export async function sendEmail(
+  options: EmailOptions
+): Promise<{ success: boolean; messageId?: string; error?: string }> {
   if (!env.SES_FROM_EMAIL) {
     return { success: false, error: "SES_FROM_EMAIL not configured" };
   }
@@ -90,7 +96,9 @@ export async function sendEmail(options: EmailOptions): Promise<{ success: boole
 /**
  * Send a templated email (requires SES templates to be configured)
  */
-export async function sendTemplatedEmail(options: TemplatedEmailOptions): Promise<{ success: boolean; messageId?: string; error?: string }> {
+export async function sendTemplatedEmail(
+  options: TemplatedEmailOptions
+): Promise<{ success: boolean; messageId?: string; error?: string }> {
   if (!env.SES_FROM_EMAIL) {
     return { success: false, error: "SES_FROM_EMAIL not configured" };
   }

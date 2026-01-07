@@ -29,7 +29,7 @@ export default function HomePage() {
             Build Your SaaS
             <span className="text-primary"> Faster</span>
           </h1>
-          <p className="mb-8 text-xl text-base-content/70">
+          <p className="text-base-content/70 mb-8 text-xl">
             Production-ready Next.js 16 template with database abstraction, auth
             providers, and Nexus integration. Start building your product today.
           </p>
@@ -84,7 +84,7 @@ export default function HomePage() {
       </main>
 
       {/* Footer */}
-      <footer className="footer footer-center bg-base-200 p-10 text-base-content">
+      <footer className="footer footer-center bg-base-200 text-base-content p-10">
         <div>
           <p>
             Built with Next.js 16, React 19, and TailwindCSS.

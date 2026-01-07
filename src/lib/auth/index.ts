@@ -24,5 +24,11 @@ export async function getAuth() {
 }
 
 // For static imports when you know the provider at build time
-export { getServerAuth as getSupabaseServerAuth, getClientAuth as getSupabaseClientAuth } from "./supabase-auth";
-export { getServerAuth as getNextAuthServerAuth, authOptions as nextAuthOptions } from "./next-auth";
+export {
+  getServerAuth as getSupabaseServerAuth,
+  getClientAuth as getSupabaseClientAuth,
+} from "./supabase-auth";
+export {
+  getServerAuth as getNextAuthServerAuth,
+  authOptions as nextAuthOptions,
+} from "./next-auth";

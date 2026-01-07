@@ -22,5 +22,5 @@ vi.mock("next/navigation", () => ({
 }));
 
 // Mock environment variables
-process.env.DATABASE_PROVIDER = "supabase";
-process.env.AUTH_PROVIDER = "supabase";
+process.env["DATABASE_PROVIDER"] = "supabase";
+process.env["AUTH_PROVIDER"] = "supabase";

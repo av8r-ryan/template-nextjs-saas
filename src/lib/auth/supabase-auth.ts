@@ -3,10 +3,19 @@
  * Used when AUTH_PROVIDER=supabase
  */
 
-import { getSupabaseServerClient, getSupabaseBrowserClient } from "../db/supabase";
+import {
+  getSupabaseServerClient,
+  getSupabaseBrowserClient,
+} from "../db/supabase";
 import type { AuthProvider, AuthResult, AuthSession, AuthUser } from "./types";
 
-function mapSupabaseUser(user: { id: string; email?: string; user_metadata?: { name?: string; avatar_url?: string } } | null): AuthUser | null {
+function mapSupabaseUser(
+  user: {
+    id: string;
+    email?: string;
+    user_metadata?: { name?: string; avatar_url?: string };
+  } | null
+): AuthUser | null {
   if (!user) return null;
   return {
     id: user.id,
@@ -24,16 +33,24 @@ export async function getServerAuth(): Promise<AuthProvider> {
 
   return {
     async getSession(): Promise<AuthSession | null> {
-      const { data: { session } } = await supabase.auth.getSession();
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
       if (!session) return null;
+      const user = mapSupabaseUser(session.user);
+      if (!user) return null;
       return {
-        user: mapSupabaseUser(session.user)!,
-        expires: new Date(session.expires_at! * 1000).toISOString(),
+        user,
+        expires: session.expires_at
+          ? new Date(session.expires_at * 1000).toISOString()
+          : new Date(Date.now() + 3600 * 1000).toISOString(),
       };
     },
 
     async getUser(): Promise<AuthUser | null> {
-      const { data: { user } } = await supabase.auth.getUser();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
       return mapSupabaseUser(user);
     },
 
@@ -42,12 +59,18 @@ export async function getServerAuth(): Promise<AuthProvider> {
         email,
         password,
       });
+      const user = mapSupabaseUser(data.user);
       return {
-        user: mapSupabaseUser(data.user),
-        session: data.session ? {
-          user: mapSupabaseUser(data.user)!,
-          expires: new Date(data.session.expires_at! * 1000).toISOString(),
-        } : null,
+        user,
+        session:
+          data.session && user
+            ? {
+                user,
+                expires: data.session.expires_at
+                  ? new Date(data.session.expires_at * 1000).toISOString()
+                  : new Date(Date.now() + 3600 * 1000).toISOString(),
+              }
+            : null,
         error: error ? new Error(error.message) : null,
       };
     },
@@ -57,12 +80,18 @@ export async function getServerAuth(): Promise<AuthProvider> {
         email,
         password,
       });
+      const user = mapSupabaseUser(data.user);
       return {
-        user: mapSupabaseUser(data.user),
-        session: data.session ? {
-          user: mapSupabaseUser(data.user)!,
-          expires: new Date(data.session.expires_at! * 1000).toISOString(),
-        } : null,
+        user,
+        session:
+          data.session && user
+            ? {
+                user,
+                expires: data.session.expires_at
+                  ? new Date(data.session.expires_at * 1000).toISOString()
+                  : new Date(Date.now() + 3600 * 1000).toISOString(),
+              }
+            : null,
         error: error ? new Error(error.message) : null,
       };
     },
@@ -87,16 +116,24 @@ export function getClientAuth(): AuthProvider {
 
   return {
     async getSession(): Promise<AuthSession | null> {
-      const { data: { session } } = await supabase.auth.getSession();
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
       if (!session) return null;
+      const user = mapSupabaseUser(session.user);
+      if (!user) return null;
       return {
-        user: mapSupabaseUser(session.user)!,
-        expires: new Date(session.expires_at! * 1000).toISOString(),
+        user,
+        expires: session.expires_at
+          ? new Date(session.expires_at * 1000).toISOString()
+          : new Date(Date.now() + 3600 * 1000).toISOString(),
       };
     },
 
     async getUser(): Promise<AuthUser | null> {
-      const { data: { user } } = await supabase.auth.getUser();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
       return mapSupabaseUser(user);
     },
 
@@ -105,12 +142,18 @@ export function getClientAuth(): AuthProvider {
         email,
         password,
       });
+      const user = mapSupabaseUser(data.user);
       return {
-        user: mapSupabaseUser(data.user),
-        session: data.session ? {
-          user: mapSupabaseUser(data.user)!,
-          expires: new Date(data.session.expires_at! * 1000).toISOString(),
-        } : null,
+        user,
+        session:
+          data.session && user
+            ? {
+                user,
+                expires: data.session.expires_at
+                  ? new Date(data.session.expires_at * 1000).toISOString()
+                  : new Date(Date.now() + 3600 * 1000).toISOString(),
+              }
+            : null,
         error: error ? new Error(error.message) : null,
       };
     },
@@ -120,12 +163,18 @@ export function getClientAuth(): AuthProvider {
         email,
         password,
       });
+      const user = mapSupabaseUser(data.user);
       return {
-        user: mapSupabaseUser(data.user),
-        session: data.session ? {
-          user: mapSupabaseUser(data.user)!,
-          expires: new Date(data.session.expires_at! * 1000).toISOString(),
-        } : null,
+        user,
+        session:
+          data.session && user
+            ? {
+                user,
+                expires: data.session.expires_at
+                  ? new Date(data.session.expires_at * 1000).toISOString()
+                  : new Date(Date.now() + 3600 * 1000).toISOString(),
+              }
+            : null,
         error: error ? new Error(error.message) : null,
       };
     },

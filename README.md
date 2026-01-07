@@ -60,17 +60,17 @@ AUTH_PROVIDER=supabase  # or 'nextauth'
 
 ## Scripts
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start development server (Turbopack) |
-| `npm run build` | Production build |
-| `npm run start` | Start production server |
-| `npm run lint` | ESLint + Prettier check |
-| `npm run format` | Auto-fix formatting |
-| `npm run test` | Run unit tests |
-| `npm run test:e2e` | Run E2E tests |
-| `npm run lighthouse` | Run Lighthouse audit |
-| `npm run validate` | Full validation |
+| Command              | Description                          |
+| -------------------- | ------------------------------------ |
+| `npm run dev`        | Start development server (Turbopack) |
+| `npm run build`      | Production build                     |
+| `npm run start`      | Start production server              |
+| `npm run lint`       | ESLint + Prettier check              |
+| `npm run format`     | Auto-fix formatting                  |
+| `npm run test`       | Run unit tests                       |
+| `npm run test:e2e`   | Run E2E tests                        |
+| `npm run lighthouse` | Run Lighthouse audit                 |
+| `npm run validate`   | Full validation                      |
 
 ## Project Structure
 

@@ -1,9 +1,11 @@
 # SaaS Template Roadmap
 
 ## Overview
+
 Production-ready Next.js 16 SaaS template for Nexus-managed products.
 
 ## Current Milestone
+
 - [x] Initial template setup
 - [x] Database abstraction (Supabase/Neon)
 - [x] Auth abstraction (Supabase Auth/NextAuth)
@@ -18,6 +20,7 @@ Production-ready Next.js 16 SaaS template for Nexus-managed products.
 - [x] GitHub Actions CI pipeline
 
 ## Backlog
+
 - [ ] Add Stripe subscription integration
 - [ ] Add webhook handling template
 - [ ] Add more email templates
@@ -27,9 +30,11 @@ Production-ready Next.js 16 SaaS template for Nexus-managed products.
 - [ ] Add OpenTelemetry tracing
 
 ## Completed
+
 - Template structure and architecture
 - All core abstractions implemented
 - Full testing and CI pipeline
 
 ---
-*Synced with Nexus Command Center*
+
+_Synced with Nexus Command Center_

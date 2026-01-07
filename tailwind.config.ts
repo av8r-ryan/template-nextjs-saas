@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss";
 import daisyui from "daisyui";
 
-export default {
+const config: Config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -37,33 +37,38 @@ export default {
     },
   },
   plugins: [daisyui],
-  daisyui: {
-    themes: [
-      {
-        light: {
-          primary: "#7c3aed",
-          secondary: "#3b82f6",
-          accent: "#10b981",
-          neutral: "#1f2937",
-          "base-100": "#ffffff",
-          info: "#3b82f6",
-          success: "#22c55e",
-          warning: "#f59e0b",
-          error: "#ef4444",
-        },
-        dark: {
-          primary: "#a78bfa",
-          secondary: "#60a5fa",
-          accent: "#34d399",
-          neutral: "#1f2937",
-          "base-100": "#0f172a",
-          info: "#60a5fa",
-          success: "#4ade80",
-          warning: "#fbbf24",
-          error: "#f87171",
-        },
+};
+
+// DaisyUI configuration (separate from Tailwind config for type safety)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+(config as any).daisyui = {
+  themes: [
+    {
+      light: {
+        primary: "#7c3aed",
+        secondary: "#3b82f6",
+        accent: "#10b981",
+        neutral: "#1f2937",
+        "base-100": "#ffffff",
+        info: "#3b82f6",
+        success: "#22c55e",
+        warning: "#f59e0b",
+        error: "#ef4444",
       },
-    ],
-    darkTheme: "dark",
-  },
-} satisfies Config;
+      dark: {
+        primary: "#a78bfa",
+        secondary: "#60a5fa",
+        accent: "#34d399",
+        neutral: "#1f2937",
+        "base-100": "#0f172a",
+        info: "#60a5fa",
+        success: "#4ade80",
+        warning: "#fbbf24",
+        error: "#f87171",
+      },
+    },
+  ],
+  darkTheme: "dark",
+};
+
+export default config;

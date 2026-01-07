@@ -61,17 +61,28 @@ export function getSupabaseBrowserClient(): SupabaseClient<Database> {
   return browserClient;
 }
 
+type CookieStore = Awaited<ReturnType<typeof cookies>>;
+
+interface CookieToSet {
+  name: string;
+  value: string;
+  options?: Parameters<CookieStore["set"]>[2];
+}
+
 /**
  * Get Supabase client for server components/API routes
  */
-export async function getSupabaseServerClient(): Promise<SupabaseClient<Database>> {
+export async function getSupabaseServerClient(): Promise<
+  SupabaseClient<Database>
+> {
   if (!env.NEXT_PUBLIC_SUPABASE_URL || !env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
     throw new Error("Missing Supabase environment variables");
   }
 
   const cookieStore = await cookies();
 
-  return createServerClient<Database>(
+  // eslint-disable-next-line @typescript-eslint/no-deprecated
+  const client = createServerClient<Database>(
     env.NEXT_PUBLIC_SUPABASE_URL,
     env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
     {
@@ -79,18 +90,21 @@ export async function getSupabaseServerClient(): Promise<SupabaseClient<Database
         getAll() {
           return cookieStore.getAll();
         },
-        setAll(cookiesToSet) {
+        setAll(cookiesToSet: CookieToSet[]) {
           try {
             cookiesToSet.forEach(({ name, value, options }) =>
               cookieStore.set(name, value, options)
             );
-          } catch {
-            // Ignore - called from Server Component
+          } catch (error) {
+            // Expected when called from Server Component where cookies are read-only
+            // This is safe to ignore as session cookies are already set from client
+            void error;
           }
         },
       },
     }
   );
+  return client;
 }
 
 /**

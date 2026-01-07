@@ -24,5 +24,9 @@ export async function getDatabase() {
 }
 
 // For static imports when you know the provider at build time
-export { getSupabaseBrowserClient, getSupabaseServerClient, getSupabaseAdminClient } from "./supabase";
+export {
+  getSupabaseBrowserClient,
+  getSupabaseServerClient,
+  getSupabaseAdminClient,
+} from "./supabase";
 export { getNeonClient } from "./neon";

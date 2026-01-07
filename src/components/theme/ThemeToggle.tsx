@@ -57,7 +57,7 @@ export function ThemeToggle() {
       </div>
       <ul
         tabIndex={0}
-        className="menu dropdown-content z-50 mt-3 w-36 rounded-box bg-base-200 p-2 shadow-lg"
+        className="menu dropdown-content rounded-box bg-base-200 z-50 mt-3 w-36 p-2 shadow-lg"
       >
         <li>
           <button

@@ -22,10 +22,17 @@ export interface DatabaseClient {
   from: <T extends keyof Tables>(
     table: T
   ) => {
-    select: (columns?: string) => Promise<{ data: Tables[T][] | null; error: Error | null }>;
-    insert: (data: Partial<Tables[T]>) => Promise<{ data: Tables[T] | null; error: Error | null }>;
+    select: (
+      columns?: string
+    ) => Promise<{ data: Tables[T][] | null; error: Error | null }>;
+    insert: (
+      data: Partial<Tables[T]>
+    ) => Promise<{ data: Tables[T] | null; error: Error | null }>;
     update: (data: Partial<Tables[T]>) => {
-      eq: (column: string, value: unknown) => Promise<{ data: Tables[T] | null; error: Error | null }>;
+      eq: (
+        column: string,
+        value: unknown
+      ) => Promise<{ data: Tables[T] | null; error: Error | null }>;
     };
     delete: () => {
       eq: (column: string, value: unknown) => Promise<{ error: Error | null }>;
